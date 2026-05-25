@@ -1,7 +1,10 @@
+import { useState } from "react";
 import logo from "../../assets/branding/logo.png";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar({ activeSection, setActiveSection }) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const goToSection = (section) => {
     window.scrollTo({
       top: 0,
@@ -9,10 +12,11 @@ export default function Navbar({ activeSection, setActiveSection }) {
     });
 
     setActiveSection(section);
+    setIsMobileMenuOpen(false);
   };
 
   return (
-    <header className="navbar">
+    <header className={`navbar ${isMobileMenuOpen ? "mobile-open" : ""}`}>
       <button
         className="brand"
         type="button"
@@ -55,9 +59,52 @@ export default function Navbar({ activeSection, setActiveSection }) {
         </button>
       </nav>
 
-      <button className="mobile-menu" type="button">
-        <Menu size={24} />
+      <button
+        className="mobile-menu"
+        type="button"
+        aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+        onClick={() => setIsMobileMenuOpen((current) => !current)}
+      >
+        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
+
+      {isMobileMenuOpen && (
+        <nav className="mobile-nav-links">
+          <button
+            type="button"
+            className={activeSection === "inicio" ? "active-link" : ""}
+            onClick={() => goToSection("inicio")}
+          >
+            Inicio
+          </button>
+
+          <button
+            type="button"
+            className={activeSection === "supermercado" ? "active-link" : ""}
+            onClick={() => goToSection("supermercado")}
+          >
+            Supermercado
+          </button>
+
+          <button
+            type="button"
+            className={
+              activeSection === "cliente-frecuente" ? "active-link" : ""
+            }
+            onClick={() => goToSection("cliente-frecuente")}
+          >
+            Cliente Frecuente
+          </button>
+
+          <button
+            type="button"
+            className={activeSection === "contacto" ? "active-link" : ""}
+            onClick={() => goToSection("contacto")}
+          >
+            Contacto
+          </button>
+        </nav>
+      )}
     </header>
   );
 }

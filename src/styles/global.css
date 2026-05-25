@@ -114,6 +114,42 @@ button {
   cursor: pointer;
 }
 
+.mobile-nav-links {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  right: 0;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid rgba(28, 125, 65, 0.12);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 24px 60px rgba(12, 48, 24, 0.14);
+}
+
+.mobile-nav-links button {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  color: #243322;
+  background: rgba(28, 125, 65, 0.07);
+  cursor: pointer;
+  font-weight: 950;
+  text-align: center;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.mobile-nav-links button:hover,
+.mobile-nav-links button.active-link {
+  color: #ffffff;
+  background: linear-gradient(135deg, #1c7d41, #33a85b);
+  transform: translateY(-2px);
+}
+
 /* HERO */
 
 .hero-section {
@@ -1274,7 +1310,16 @@ button {
   }
 
   .mobile-menu {
+    position: relative;
+    z-index: 3;
     display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navbar.mobile-open {
+    border-color: rgba(28, 125, 65, 0.22);
+    box-shadow: 0 26px 70px rgba(12, 48, 24, 0.16);
   }
 
   .hero-section {
