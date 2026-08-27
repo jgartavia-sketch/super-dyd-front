@@ -19,12 +19,6 @@ export default function Hero({ setActiveSection }) {
         </div>
         <div className="hero-location"><MapPin size={18} />La Piñata, Ciudad Quesada, San Carlos</div>
       </motion.div>
-      <motion.div className="hero-card" initial={{ opacity: 0, scale: 0.88 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9 }}>
-        <h3>Promociones activas</h3>
-        <div className="promo-item"><span>Canasta básica</span><strong>Ofertas semanales</strong></div>
-        <div className="promo-item"><span>Bebidas y snacks</span><strong>Combos especiales</strong></div>
-        <div className="promo-item"><span>Clientes registrados</span><strong>Puntos y premios</strong></div>
-      </motion.div>
     </section>
   );
 }
