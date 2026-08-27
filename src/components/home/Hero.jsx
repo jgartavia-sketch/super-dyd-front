@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, MapPin, ShoppingCart, Sparkles } from "lucide-react";
+import { MapPin, ShoppingCart, Sparkles } from "lucide-react";
 
 export default function Hero({ setActiveSection }) {
   const goToStore = () => {
@@ -15,7 +15,6 @@ export default function Hero({ setActiveSection }) {
         <p>Supermercado D&amp;D combina cercanía, buenos precios y una experiencia moderna para toda la comunidad de La Piñata, Ciudad Quesada.</p>
         <div className="hero-actions">
           <button className="primary-btn" type="button" onClick={goToStore}><ShoppingCart size={20} />Ver supermercado</button>
-          <a className="secondary-btn" href="https://wa.me/50664230421" target="_blank" rel="noreferrer">Comprar por WhatsApp <ArrowRight size={18} /></a>
         </div>
         <div className="hero-location"><MapPin size={18} />La Piñata, Ciudad Quesada, San Carlos</div>
       </motion.div>
