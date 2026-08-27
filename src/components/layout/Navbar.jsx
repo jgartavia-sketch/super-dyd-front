@@ -1,110 +1,25 @@
 import { useState } from "react";
-import logo from "../../assets/branding/logo.png";
 import { Menu, X } from "lucide-react";
+import logo from "../../assets/branding/logo.png";
+
+const links = [["inicio", "Inicio"], ["supermercado", "Supermercado"], ["mi-cuenta", "Mi cuenta"], ["nosotros", "Nosotros"]];
 
 export default function Navbar({ activeSection, setActiveSection }) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const goToSection = (section) => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-
+  const [open, setOpen] = useState(false);
+  const navigate = (section) => {
     setActiveSection(section);
-    setIsMobileMenuOpen(false);
+    setOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
+  const items = links.map(([id, label]) => (
+    <button key={id} type="button" className={activeSection === id ? "active-link" : ""} onClick={() => navigate(id)}>{label}</button>
+  ));
   return (
-    <header className={`navbar ${isMobileMenuOpen ? "mobile-open" : ""}`}>
-      <button
-        className="brand"
-        type="button"
-        onClick={() => goToSection("inicio")}
-      >
-        <img src={logo} alt="Supermercado D&D" />
-      </button>
-
-      <nav className="nav-links">
-        <button
-          type="button"
-          className={activeSection === "inicio" ? "active-link" : ""}
-          onClick={() => goToSection("inicio")}
-        >
-          Inicio
-        </button>
-
-        <button
-          type="button"
-          className={activeSection === "supermercado" ? "active-link" : ""}
-          onClick={() => goToSection("supermercado")}
-        >
-          Supermercado
-        </button>
-
-        <button
-          type="button"
-          className={activeSection === "cliente-frecuente" ? "active-link" : ""}
-          onClick={() => goToSection("cliente-frecuente")}
-        >
-          Cliente Frecuente
-        </button>
-
-        <button
-          type="button"
-          className={activeSection === "contacto" ? "active-link" : ""}
-          onClick={() => goToSection("contacto")}
-        >
-          Contacto
-        </button>
-      </nav>
-
-      <button
-        className="mobile-menu"
-        type="button"
-        aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
-        onClick={() => setIsMobileMenuOpen((current) => !current)}
-      >
-        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
-
-      {isMobileMenuOpen && (
-        <nav className="mobile-nav-links">
-          <button
-            type="button"
-            className={activeSection === "inicio" ? "active-link" : ""}
-            onClick={() => goToSection("inicio")}
-          >
-            Inicio
-          </button>
-
-          <button
-            type="button"
-            className={activeSection === "supermercado" ? "active-link" : ""}
-            onClick={() => goToSection("supermercado")}
-          >
-            Supermercado
-          </button>
-
-          <button
-            type="button"
-            className={
-              activeSection === "cliente-frecuente" ? "active-link" : ""
-            }
-            onClick={() => goToSection("cliente-frecuente")}
-          >
-            Cliente Frecuente
-          </button>
-
-          <button
-            type="button"
-            className={activeSection === "contacto" ? "active-link" : ""}
-            onClick={() => goToSection("contacto")}
-          >
-            Contacto
-          </button>
-        </nav>
-      )}
+    <header className={`navbar ${open ? "mobile-open" : ""}`}>
+      <button className="brand" type="button" onClick={() => navigate("inicio")}><img src={logo} alt="Supermercado D&D" /></button>
+      <nav className="nav-links" aria-label="Navegación principal">{items}</nav>
+      <button className="mobile-menu" type="button" aria-label={open ? "Cerrar menú" : "Abrir menú"} aria-expanded={open} onClick={() => setOpen((value) => !value)}>{open ? <X size={24} /> : <Menu size={24} />}</button>
+      {open && <nav className="mobile-nav-links" aria-label="Navegación móvil">{items}</nav>}
     </header>
   );
 }
